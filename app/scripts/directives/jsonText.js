@@ -12,11 +12,11 @@ angular.module('visApp')
         }, true);
 
         function into(input) {
-          return JSON.parse(input);
+          return angular.fromJson(input);
         }
 
         function out(data) {
-          return JSON.stringify(data, undefined, 2);
+          return angular.toJson(data, true);
         }
 
         ngModel.$parsers.push(into);
