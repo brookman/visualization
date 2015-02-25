@@ -9,7 +9,7 @@
 angular.module('visApp')
   .directive('formList', function (lodash) {
     return {
-      templateUrl: 'scripts/directives/formlist.html',
+      templateUrl: 'views/formlist.html',
       restrict: 'E',
       link: function (scope) {
         scope.wordCloud = [{text: 'Word Cloud', weigth: 1}];
