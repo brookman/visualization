@@ -22,7 +22,7 @@ angular
     'ui.select',
     'mongolabResourceHttp'
   ])
-  .config(function ($routeProvider, $locationProvider) {
+  .config(function ($routeProvider, $locationProvider, $httpProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
@@ -36,6 +36,9 @@ angular
         redirectTo: '/'
       });
     $locationProvider.html5Mode(false);
+
+    $httpProvider.defaults.useXDomain = true;
+    delete $httpProvider.defaults.headers.common['X-Requested-With'];
   })
   .constant('MONGOLAB_CONFIG', {DB_NAME: 'interests'})
   .factory('Person', function ($mongolabResourceHttp) {
