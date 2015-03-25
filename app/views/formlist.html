@@ -9,7 +9,7 @@
       <label class="col-sm-1 control-label"></label>
     </div>
 
-    <div class="row" ng-repeat="person in list | orderBy:name">
+    <div class="row" ng-repeat="person in list">
       <div class="form-group col-sm-4">
         <input class="form-control" name="personName" placeholder="Name" ng-model="person.name">
       </div>
@@ -34,6 +34,7 @@
     <div class="row">
       <div class="form-group col-sm-12">
         <button class="btn btn-default" ng-click="addPerson()">Add person</button>
+        <button class="btn btn-default" ng-click="save()">Save</button>
       </div>
     </div>
   </div>
@@ -50,16 +51,17 @@
 </div>
 
 <div class="row">
-  <div class="col-sm-4">
-    <jqcloud words="wordCloud" width="500" height="350" delay="10" steps="7"
-             font-size="{from:0.1, to:0.03}"></jqcloud>
-  </div>
-
-  <div class="col-sm-8">
+  <div class="col-sm-12">
     <bigraph data="list"></bigraph>
   </div>
 </div>
 
+<div class="row">
+  <div class="col-sm-6">
+    <jqcloud words="wordCloud" width="500" height="350" delay="10" steps="7"
+             font-size="{from:0.1, to:0.03}"></jqcloud>
+  </div>
+</div>
 
 <div class="row">
   <label class="col-sm-1 control-label">Json</label>

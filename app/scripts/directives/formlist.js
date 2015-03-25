@@ -7,18 +7,21 @@
  * # formList
  */
 angular.module('visApp')
-  .directive('formList', function (lodash) {
+  .directive('formList', function (lodash, $routeParams, $location, Person) {
     return {
       templateUrl: 'views/formlist.html',
       restrict: 'E',
       link: function (scope) {
+        var toRemove = [];
+        Person.all().then(function (persons) {
+          var sorted = lodash.sortBy(persons, 'name');
+          scope.list = sorted;
+        });
+
         scope.wordCloud = [{text: 'Word Cloud', weigth: 1}];
         scope.avaliableInterests = ['computer', 'tv', 'hello world'];
         scope.selectedInterests = [];
         scope.list = [];
-
-        scope.list.push({name: 'Beni', interests: ['Computers', 'Chocolate', 'Ski']});
-        scope.list.push({name: 'Seppi', interests: ['Computers', 'Hand ball', 'Snowboard']});
 
         scope.$watch('list', function (newValue, oldValue) {
           var newList = allInterests(newValue);
@@ -36,10 +39,24 @@ angular.module('visApp')
         };
 
         scope.addPerson = function () {
-          scope.list.push({name: '', interests: []});
+          var person = new Person();
+          person.name = name;
+          person.interests = [];
+          scope.list.push(person);
+        };
+
+        scope.save = function () {
+          angular.forEach(scope.list, function (person) {
+            person.$saveOrUpdate();
+          });
+          angular.forEach(toRemove, function (person) {
+            person.$remove();
+          });
+          toRemove = [];
         };
 
         scope.deletePerson = function (target) {
+          toRemove.push(target);
           scope.list = lodash.reject(scope.list, function (item) {
             return target === item;
           });

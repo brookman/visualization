@@ -10,8 +10,7 @@ angular.module('visApp')
       link: function (scope, element) {
         d3Service.d3().then(function (d3) {
 
-          scope.$watch('matrix', function (newValue, oldValue) {
-            console.info(scope.matrix);
+          scope.$watch('matrix', function () {
             scope.render();
           });
 
@@ -89,15 +88,15 @@ angular.module('visApp')
               .style('opacity', 1);
 
 // Returns an array of tick angles and labels, given a group.
-            function groupTicks(d) {
-              var k = (d.endAngle - d.startAngle) / d.value;
-              return d3.range(0, d.value, 1000).map(function (v, i) {
-                return {
-                  angle: v * k + d.startAngle,
-                  label: i % 5 ? null : v / 1000 + 'k'
-                };
-              });
-            }
+//            function groupTicks(d) {
+//              var k = (d.endAngle - d.startAngle) / d.value;
+//              return d3.range(0, d.value, 1000).map(function (v, i) {
+//                return {
+//                  angle: v * k + d.startAngle,
+//                  label: i % 5 ? null : v / 1000 + 'k'
+//                };
+//              });
+//            }
 
 // Returns an event handler for fading a given chord group.
             function fade(opacity) {

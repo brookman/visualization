@@ -1,1 +1,72 @@
-<div class="row"> <div class="col-sm-12"> <h2></h2> <div class="row"> <label class="col-sm-4 control-label">Name</label> <label class="col-sm-7 control-label">Interests</label> <label class="col-sm-1 control-label"></label> </div> <div class="row" ng-repeat="person in list | orderBy:name"> <div class="form-group col-sm-4"> <input class="form-control" name="personName" placeholder="Name" ng-model="person.name"> </div> <div class="form-group col-sm-7"> <ui-select multiple ng-model="person.interests" theme="bootstrap" tagging="true" tagging-label="false" reset-search-input="true" on-select="selected(person)" title="Choose interests"> <ui-select-match placeholder="Enter interest and press Return">{{$item}}</ui-select-match> <ui-select-choices repeat="interest in allInterestsDistinct() | filter:$select.search"> {{interest}} </ui-select-choices> </ui-select> </div> <div class="form-group col-sm-1"> <button type="button" class="btn btn-default btn-sm" ng-click="deletePerson(person)"> <span class="glyphicon glyphicon-remove"></span> </button> </div> </div> <div class="row"> <div class="form-group col-sm-12"> <button class="btn btn-default" ng-click="addPerson()">Add person</button> </div> </div> </div> <!--<div class="col-sm-4">--> <!--<h2>All interests</h2>--> <!--<div ng-repeat="interest in allInterestsDistinct()">--> <!--<button type="button" class="btn btn-default btn-sm">--> <!--{{interest}} <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>--> <!--</button>--> <!--</div>--> <!--</div>--> </div> <div class="row"> <div class="col-sm-4"> <jqcloud words="wordCloud" width="500" height="350" delay="10" steps="7" font-size="{from:0.1, to:0.03}"></jqcloud> </div> <div class="col-sm-8"> <bigraph data="list"></bigraph> </div> </div> <div class="row"> <label class="col-sm-1 control-label">Json</label> <div class="col-sm-11"> <textarea json-text class="form-control" rows="50" ng-model="list"></textarea> </div> </div>
+<div class="row">
+
+  <div class="col-sm-12">
+    <h2></h2>
+
+    <div class="row">
+      <label class="col-sm-4 control-label">Name</label>
+      <label class="col-sm-7 control-label">Interests</label>
+      <label class="col-sm-1 control-label"></label>
+    </div>
+
+    <div class="row" ng-repeat="person in list">
+      <div class="form-group col-sm-4">
+        <input class="form-control" name="personName" placeholder="Name" ng-model="person.name">
+      </div>
+
+      <div class="form-group col-sm-7">
+        <ui-select multiple ng-model="person.interests" theme="bootstrap" tagging="true" tagging-label="false"
+                   reset-search-input="true" on-select="selected(person)"
+                   title="Choose interests">
+          <ui-select-match placeholder="Enter interest and press Return">{{$item}}</ui-select-match>
+          <ui-select-choices repeat="interest in allInterestsDistinct() | filter:$select.search"> {{interest}}
+          </ui-select-choices>
+        </ui-select>
+      </div>
+
+      <div class="form-group col-sm-1">
+        <button type="button" class="btn btn-default btn-sm" ng-click="deletePerson(person)">
+          <span class="glyphicon glyphicon-remove"></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-sm-12">
+        <button class="btn btn-default" ng-click="addPerson()">Add person</button>
+        <button class="btn btn-default" ng-click="save()">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!--<div class="col-sm-4">-->
+  <!--<h2>All interests</h2>-->
+  <!--<div ng-repeat="interest in allInterestsDistinct()">-->
+  <!--<button type="button" class="btn btn-default btn-sm">-->
+  <!--{{interest}} <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>-->
+  <!--</button>-->
+  <!--</div>-->
+  <!--</div>-->
+
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <bigraph data="list"></bigraph>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-6">
+    <jqcloud words="wordCloud" width="500" height="350" delay="10" steps="7"
+             font-size="{from:0.1, to:0.03}"></jqcloud>
+  </div>
+</div>
+
+<div class="row">
+  <label class="col-sm-1 control-label">Json</label>
+
+  <div class="col-sm-11">
+    <textarea json-text class="form-control" rows="50" ng-model="list"></textarea>
+  </div>
+</div>

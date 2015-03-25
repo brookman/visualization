@@ -19,7 +19,8 @@ angular
     'ngTouch',
     'ngLodash',
     'angular-jqcloud',
-    'ui.select'
+    'ui.select',
+    'mongolabResourceHttp'
   ])
   .config(function ($routeProvider, $locationProvider) {
     $routeProvider
@@ -34,5 +35,9 @@ angular
       .otherwise({
         redirectTo: '/'
       });
-    $locationProvider.html5Mode(true);
+    $locationProvider.html5Mode(false);
+  })
+  .constant('MONGOLAB_CONFIG', {DB_NAME: 'interests'})
+  .factory('Person', function ($mongolabResourceHttp) {
+    return $mongolabResourceHttp('persons');
   });
